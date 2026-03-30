@@ -32,6 +32,7 @@ class View(QWidget):
         self.setWindowTitle('Calculator')
         self.setWindowIcon(QIcon('icon.png'))
         self.resize(256,256)
+        self.show()
 
     def activateMessage(self): # 버튼을 클릭할 때 동작하는 함수 : 메시지 박스 출력
         # QMessageBox.information(self, "information", "Button Clicked!")

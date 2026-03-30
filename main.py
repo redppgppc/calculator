@@ -1,4 +1,6 @@
 # ch 4.2.1. main.py
+import logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 import sys
 from ui import View
 from ctrl import Control
