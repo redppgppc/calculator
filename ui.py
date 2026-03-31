@@ -20,7 +20,7 @@ class View(QWidget):
         self.btn1=QPushButton('Message',self) # 버튼 추가
         self.btn2=QPushButton('Clear',self) # 버튼 2 추가
 
-        hbox=QVBoxLayout() # 수직 레이아웃 위젯 생성
+        hbox = QHBoxLayout() # 수직 레이아웃 위젯 생성
         hbox.addStretch(1) # 빈 공간
         hbox.addWidget(self.btn1) # 버튼 위치
         hbox.addWidget(self.btn2) # 버튼 위치
