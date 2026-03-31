@@ -1,15 +1,19 @@
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QVBoxLayout, 
-                             QMessageBox, QPlainTextEdit) # QPlainTextEdit 추가
+                             QMessageBox, QPlainTextEdit, QHBoxLayout, QLabel) # QPlainTextEdit 추가
 
 from PyQt5.QtGui import QIcon # icno을 추가하기 위한 라이브러리
+from PyQt5.QtCore import QDate, Qt
 
 class View(QWidget):
 
     def __init__(self):
         super().__init__()
+        self.date = QDate.currentDate()
         self.initUI()
 
     def initUI(self):
+        self.lbl1 = QLabel(self.date.toString(Qt.DefaultLocaleLongDate), self)
+
         self.te1 = QPlainTextEdit() # 텍스트 에디트 위젯 생성
         self.te1.setReadOnly(True) # 텍스트 에디트 위젯을 읽기만 가능하도록 수정
 
@@ -23,9 +27,8 @@ class View(QWidget):
 
         vbox=QVBoxLayout()
         vbox.addWidget(self.te1)
-        #vbox.addWidget(self.btn1)
         vbox.addLayout(hbox) # btn1 위치에 hbox를 배치
-        vbox.addStretch(1)
+        vbox.addWidget(self.lbl1)
 
         self.setLayout(vbox) # 빈 공산 = 버튼 - 빈 공간 순으로 수직 배치된 레이아웃 설정
 
