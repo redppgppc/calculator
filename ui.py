@@ -1,18 +1,32 @@
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QVBoxLayout, 
-                             QMessageBox, QPlainTextEdit, QHBoxLayout, QLabel) # QPlainTextEdit 추가
+                             QMessageBox, QPlainTextEdit, QHBoxLayout, 
+                             QLineEdit, QComboBox) # QPlainTextEdit 추가
 
 from PyQt5.QtGui import QIcon # icno을 추가하기 위한 라이브러리
-from PyQt5.QtCore import QDate, Qt
+from PyQt5 import QtCore
 
 class View(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.date = QDate.currentDate()
         self.initUI()
 
     def initUI(self):
-        self.lbl1 = QLabel(self.date.toString(Qt.DefaultLocaleLongDate), self)
+       # self.lbl1 = QLabel(self.date.toString(Qt.DefaultLocaleLongDate), self)
+
+        self.le1 = QLineEdit('0', self) # 라인 에디트 위젯 생성
+        self.le1.setAlignment(QtCore.Qt.AlignRight) # 라인 에디트 위젯의 텍스트를 오른쪽 정렬
+        
+        self.le2 = QLineEdit('0', self) # 라인 에디트 위젯 생성
+        self.le2.setAlignment(QtCore.Qt.AlignRight) # 라인 에디트 위
+
+        self.cb = QComboBox(self) # 콤보 박스 위젯 생성
+        self.cb.addItems(['+', '-', '*', '/']) # 콤보 박스에 항목 추가
+
+        hbox_formular = QHBoxLayout() # 수평 레이아웃 위젯 생성
+        hbox_formular.addWidget(self.le1) # 라인 에디트 1 위치
+        hbox_formular.addWidget(self.cb) # 콤보 박스 위치
+        hbox_formular.addWidget(self.le2) # 라인 에디트 2
 
         self.te1 = QPlainTextEdit() # 텍스트 에디트 위젯 생성
         self.te1.setReadOnly(True) # 텍스트 에디트 위젯을 읽기만 가능하도록 수정
@@ -25,10 +39,12 @@ class View(QWidget):
         hbox.addWidget(self.btn1) # 버튼 위치
         hbox.addWidget(self.btn2) # 버튼 위치
 
+        
+
         vbox=QVBoxLayout()
         vbox.addWidget(self.te1)
+        vbox.addLayout(hbox_formular) # 수평 레이아웃을 수직 레이아웃에 배치
         vbox.addLayout(hbox) # btn1 위치에 hbox를 배치
-        vbox.addWidget(self.lbl1)
 
         self.setLayout(vbox) # 빈 공산 = 버튼 - 빈 공간 순으로 수직 배치된 레이아웃 설정
 
