@@ -1,63 +1,57 @@
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QVBoxLayout, 
-                             QMessageBox, QPlainTextEdit, QHBoxLayout, 
-                             QLineEdit, QComboBox) # QPlainTextEdit 추가
-
-from PyQt5.QtGui import QIcon # icno을 추가하기 위한 라이브러리
+from PyQt5.QtWidgets import (QApplication,QWidget,QPushButton,QVBoxLayout,
+                             QMessageBox, QPlainTextEdit, QHBoxLayout,
+                             QLineEdit, QComboBox)
+from PyQt5.QtGui import QIcon
 from PyQt5 import QtCore
 
-class View(QWidget):
 
+class View(QWidget):
+    
     def __init__(self):
         super().__init__()
         self.initUI()
-
+        
     def initUI(self):
-       # self.lbl1 = QLabel(self.date.toString(Qt.DefaultLocaleLongDate), self)
-
-        self.le1 = QLineEdit('0', self) # 라인 에디트 위젯 생성
-        self.le1.setAlignment(QtCore.Qt.AlignRight) # 라인 에디트 위젯의 텍스트를 오른쪽 정렬
-        self.le1.setFocus() # 라인 에디트 위젯에 포커스 설정
-        self.le1.selectAll() # 라인 에디트 위젯의 텍스트 전체 선택
+        self.te1 = QPlainTextEdit()
+        self.te1.setReadOnly(True)
         
-        self.le2 = QLineEdit('0', self) # 라인 에디트 위젯 생성
-        self.le2.setAlignment(QtCore.Qt.AlignRight) # 라인 에디트 위
-
-        self.cb = QComboBox(self) # 콤보 박스 위젯 생성
-        self.cb.addItems(['+', '-', '*', '/']) # 콤보 박스에 항목 추가
-
-        hbox_formular = QHBoxLayout() # 수평 레이아웃 위젯 생성
-        hbox_formular.addWidget(self.le1) # 라인 에디트 1 위치
-        hbox_formular.addWidget(self.cb) # 콤보 박스 위치
-        hbox_formular.addWidget(self.le2) # 라인 에디트 2
-
-        self.te1 = QPlainTextEdit() # 텍스트 에디트 위젯 생성
-        self.te1.setReadOnly(True) # 텍스트 에디트 위젯을 읽기만 가능하도록 수정
-
-        self.btn1=QPushButton('Calc',self) # 버튼 추가
-        self.btn2=QPushButton('Clear',self) # 버튼 2 추가
-
-        hbox = QHBoxLayout() # 수직 레이아웃 위젯 생성
-        hbox.addStretch(1) # 빈 공간
-        hbox.addWidget(self.btn1) # 버튼 위치
-        hbox.addWidget(self.btn2) # 버튼 위치
-
+        self.btn1=QPushButton('Message',self)
+        self.btn2=QPushButton('Clear',self)
         
-
+        self.le1=QLineEdit('0',self)
+        self.le1.setAlignment(QtCore.Qt.AlignRight)
+        
+        self.le2=QLineEdit('0',self)
+        self.le2.setAlignment(QtCore.Qt.AlignRight)
+        
+        self.cb = QComboBox(self)
+        self.cb.addItems(['+', '-', '*', '/'])
+        
+        hbox_formular = QHBoxLayout()
+        hbox_formular.addWidget(self.le1)
+        hbox_formular.addWidget(self.cb)
+        hbox_formular.addWidget(self.le2)
+        
+        hbox = QHBoxLayout()
+        hbox.addStretch(1)
+        hbox.addWidget(self.btn1)
+        hbox.addWidget(self.btn2)
+        
         vbox=QVBoxLayout()
         vbox.addWidget(self.te1)
-        vbox.addLayout(hbox_formular) # 수평 레이아웃을 수직 레이아웃에 배치
-        vbox.addLayout(hbox) # btn1 위치에 hbox를 배치
-
-        self.setLayout(vbox) # 빈 공산 = 버튼 - 빈 공간 순으로 수직 배치된 레이아웃 설정
-
+        vbox.addLayout(hbox_formular)
+        vbox.addLayout(hbox)
+        vbox.addStretch(1)
+        
+        self.setLayout(vbox)
+        
         self.setWindowTitle('Calculator')
         self.setWindowIcon(QIcon('icon.png'))
         self.resize(256,256)
         self.show()
-    
-    def setDisplay(self): # 버튼을 클릭할 때 동작하는 함수 : 메시지 박스 출력
-        # QMessageBox.information(self, "information", "Button Clicked!")
+        
+    def activateMessage(self):
         self.te1.appendPlainText("Button clicked!")
-    
-    def clearMessage(self): # 버튼 2 핸들러 함수 정의
+        
+    def clearMessage(self):
         self.te1.clear()
