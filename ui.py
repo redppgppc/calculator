@@ -52,7 +52,7 @@ class View(QWidget):
         self.resize(256,256)
         self.show()
         
-    def activateMessage(self, text): # 함수명 변경
+    def setDisplay(self, text): # 함수명 변경
         self.te1.appendPlainText(text)
         
     def clearMessage(self):
