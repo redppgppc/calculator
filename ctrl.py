@@ -13,6 +13,7 @@ class Control:
         else:
             return "Calculation Error"
         
+    
     def connectSignals(self): # btn1을 클릭하면 calculate 함수를 호출하여 결과를 메시지로 표시
         self.view.btn1.clicked.connect(lambda: self.view.setDisplay(self.calculate())) # 버튼 클릭 시 계산 결과를 메시지로 표시
         self.view.btn2.clicked.connect(self.view.clearMessage)
